@@ -15,8 +15,8 @@ The task is fully completed in Python.
 
 ## Dataset
 
-Firstly, I noticed that the dataset is imbalanced (more images without any ships). I decided to balance the number of ships by deleting the portion of images without any ships assuming that there still will be enough data for building accurate model.
-For all of the experiments, I reduced the size of the images to 512/512. I split the labeled data into training/validation (90% for training). Also, due to the limited resources, I use only a portion of labeled data (20%) due to the computational limitations.
+Firstly, I noticed that the dataset is imbalanced (more images without any ships). I decided to balance the number of ships by deleting the portion of images without any ships assuming that there still will be enough data for building an accurate model.
+For all of the experiments, I reduced the size of the images to 512/512. I split the labeled data into training/validation (90% for training). Also, due to the limited resources, I use only a portion of labeled data (20%) due to computational limitations.
 I use augmentations for training data (though I restrict them only to affine transformations).
 
 ## Model
@@ -36,19 +36,24 @@ Configs:
 For the time provided, my main focus on building the best model was to look through the loss functions (including in training epoch number variations and dataset size)
 
 The baseline model is the U-net trained with the cross-entropy loss. 
+![alt](baseline_sparse_augs_unet34_ce_balanced_reduced.png)
 
 The positive class is sparse (on average it takes up to 0.2 percent of the original image), which means that cross-entropy alone may be not efficient, as it makes pixel predictions independently and
 penalizes wrong predictions equally. In addition, I noticed that the model struggles most with predicting small ships (this leads to many false negative detections). Therefore, I decided to use mixed losses for training.
 
-CE loss +focal loss (to better distinguish hard examples) and finish with optimizing Lovasz loss (usual practice for tractable IOU optimization).
+CE loss + focal loss (to better distinguish hard examples) and finish with optimizing Lovasz loss (usual practice for tractable IOU optimization).
+![alt](unet34_sparse_augs_ce_focal_lovasz_loss_balanced_reduced.png)
 
 I thought that the positive class sparsity can be solved by using dice loss. I tried out different combinations of dice loss with other losses and the best option was
-dice loss+focal loss (to better distinguish hard examples) and finish with optimizing Lovasz loss (usual practice for tractable IOU optimization).
+dice loss + focal loss (to better distinguish hard examples) and finish with optimizing Lovasz loss (usual practice for tractable IOU optimization).
+![alt](unet34_sparse_augs_dice_focal_lovasz_loss_balanced_reduced.png)
+
 
 Combinations of dice loss turned out to be less effective than those with cross-entropy. Further experiments with loss functions (like using weighted cross-entropy for penalizing mispredictions of positive classes more) weren't fruitful.
 
 Here is the training log of the best-performing solution: (noting that this model was trained with 30% percent of the dataset and including more data haven't provided any improvements)
 
+![alt](training.png)
 
 
 
