@@ -1,0 +1,8 @@
+channels: 3
+model_name: "DeepLabV3"
+encoder_name: "resnet34"
+pretrained_encoder: "imagenet"
+encoder_depth: 5
+slice_size: 512
+image_h: 2048
+image_w: 1536

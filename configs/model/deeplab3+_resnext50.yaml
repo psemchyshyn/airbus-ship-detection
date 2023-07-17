@@ -1,0 +1,7 @@
+channels: 3
+model_name: "deeplabv3plus"
+encoder_name: "resnext50_32x4d"
+pretrained_encoder: "imagenet"
+encoder_depth: 5
+image_h: 2048
+image_w: 1536

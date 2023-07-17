@@ -1,0 +1,14 @@
+defaults:
+  - model: unet34
+  - data: ship
+
+training:
+  lr: 0.001
+  batch_size: 32
+  save_weights_dir: "/mnt/data/psemchyshyn/checkpoints/ship-detection/unet34_sparse_augs_focal_lovasz_loss_balanced_reduced"
+  save_logs_dir: "logs"
+  wandb_project_name: "ship-detection"
+  wandb_run_name: "unet34_sparse_augs_focal_lovasz_loss_balanced_reduced"
+  submission_name: "unet34_sparse_augs_focal_lovasz_loss_balanced_reduced.csv"
+  switch_to_lovasz_loss: 30
+  epochs: 50

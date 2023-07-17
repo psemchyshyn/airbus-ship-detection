@@ -1,0 +1,10 @@
+train_images: /mnt/data/psemchyshyn/ship-detection-data/train_v2
+test_images: /mnt/data/psemchyshyn/ship-detection-data/test_v2
+train_labels: /mnt/data/psemchyshyn/ship-detection-data/train_ship_segmentations_v2.csv
+balance_dataset: True
+reduce_dataset: 0.3
+image_w: 512
+image_h: 512
+orig_size: 768
+ext: jpg
+train_val_split: 0.9
